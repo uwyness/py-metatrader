@@ -6,9 +6,10 @@ Created on 2015/01/25
 '''
 import logging
 import os
-from mt4 import get_mt4
-from mt4 import DEFAULT_MT4_NAME
-from __builtin__ import str
+from metatrader.mt4 import get_mt4
+from metatrader.mt4 import DEFAULT_MT4_NAME
+import metatrader.report
+#from __builtin__ import str
 
 class BackTest(object):
     """
@@ -31,7 +32,6 @@ class BackTest(object):
         self.ea_name = ea_name
         self.param = param
         self.symbol = symbol
-        self.period = period
         self.from_date = from_date
         self.to_date = to_date
         self.model = model
@@ -80,7 +80,6 @@ class BackTest(object):
             fp.write('TestExpertParameters=%s.set\n' % self.ea_name)
             fp.write('TestSymbol=%s\n' % self.symbol)
             fp.write('TestModel=%s\n' % self.model)
-            fp.write('TestPeriod=%s\n' % self.period)
             fp.write('TestSpread=%s\n' % self.spread)
             fp.write('TestOptimization=%s\n' % str(self.optimization).lower())
             fp.write('TestDateEnable=true\n')
@@ -141,7 +140,7 @@ class BackTest(object):
         Notes:
           run backtest
         """
-        from report import BacktestReport
+        from metatrader.report import BacktestReport
 
         self.optimization = False
 
@@ -151,13 +150,14 @@ class BackTest(object):
         mt4 = get_mt4(alias=alias)
         mt4.run(self.ea_name, conf=bt_conf)
     
-        ret = BacktestReport(self)
+        #ret = BacktestReport(self)
+        return 0
         return ret
 
     def optimize(self, alias=DEFAULT_MT4_NAME):
         """
         """
-        from report import OptimizationReport
+        from metatrader.report import OptimizationReport
 
         self.optimization = True
         self._prepare(alias=alias)

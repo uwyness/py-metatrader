@@ -98,10 +98,10 @@ def is_uac_enabled():
     Returns:
      True if uac is enabled, False if uac is disabled.
     """
-    import _winreg    
+    import winreg    
     
-    reg_key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', 0, _winreg.KEY_READ)
-    value, regtype = _winreg.QueryValueEx(reg_key, 'EnableLUA')
+    reg_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', 0, winreg.KEY_READ)
+    value, regtype = winreg.QueryValueEx(reg_key, 'EnableLUA')
     
     if value == 1:
         #reg value 1 means UAC is enabled
