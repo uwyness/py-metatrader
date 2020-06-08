@@ -32,6 +32,7 @@ class BackTest(object):
         self.ea_name = ea_name
         self.param = param
         self.symbol = symbol
+        self.period = period
         self.from_date = from_date
         self.to_date = to_date
         self.model = model
@@ -79,13 +80,14 @@ class BackTest(object):
             fp.write('TestExpert=%s\n' % self.ea_name)
             fp.write('TestExpertParameters=%s.set\n' % self.ea_name)
             fp.write('TestSymbol=%s\n' % self.symbol)
+            fp.write('TestPeriod=%s\n' % self.period)
             fp.write('TestModel=%s\n' % self.model)
             fp.write('TestSpread=%s\n' % self.spread)
             fp.write('TestOptimization=%s\n' % str(self.optimization).lower())
             fp.write('TestDateEnable=true\n')
             fp.write('TestFromDate=%s\n' % self.from_date.strftime('%Y.%m.%d'))
             fp.write('TestToDate=%s\n' % self.to_date.strftime('%Y.%m.%d'))
-            fp.write('TestReport=%s\n' % self.ea_name)
+            fp.write('TestReport=%s\n' % self.symbol) #changed from self.ea_name
             fp.write('TestReplaceReport=%s\n' % str(self.replace_report).lower())
             fp.write('TestShutdownTerminal=%s\n' % str(shutdown_terminal).lower())
 
